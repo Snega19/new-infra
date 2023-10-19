@@ -29,18 +29,18 @@ jobs:
       - name: Initialize Terraform
         id: init
         run: terraform init
-        working-directory: /Infra/core
+        working-directory: Infra/core
 
       - name: Validate Terraform
         id: validate
         run: terraform validate -no-color
-        working-directory: /Infra/core 
+        working-directory: Infra/core 
 
       - name: Plan Terraform Changes
         id: plan
         run: terraform plan -out=tfplan -no-color
         continue-on-error: true
-        working-directory: /Infra/core
+        working-directory: Infra/core
 
       - name: Apply Terraform Changes
         id: apply
@@ -48,7 +48,7 @@ jobs:
           export TF_LOG=DEBUG
           terraform apply -auto-approve tfplan
         continue-on-error: true
-        working-directory: /Infra/core
+        working-directory: Infra/core
 
       - name: Cleanup Terraform Files
         if: steps.apply.outcome == 'success'
